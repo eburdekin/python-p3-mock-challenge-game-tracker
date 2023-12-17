@@ -58,6 +58,9 @@ class Player:
         return sum([result.game == game for result in self.results()])
 
     @classmethod
+    # store all instances of cls in all
+    # iterate through cls.all and run average_score method on each
+    # return None if there are no players that played the game provided
     def highest_scored(cls, game):
         max_average = 0
         highest = None
