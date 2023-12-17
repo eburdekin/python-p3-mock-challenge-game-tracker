@@ -2,8 +2,11 @@ from statistics import mean
 
 
 class Game:
+    all = []
+
     def __init__(self, title):
         self.title = title
+        type(self).all.append(self)
 
     @property
     def title(self):
@@ -27,8 +30,11 @@ class Game:
 
 
 class Player:
+    all = []
+
     def __init__(self, username):
         self.username = username
+        type(self).all.append(self)
 
     @property
     def username(self):
@@ -50,6 +56,17 @@ class Player:
 
     def num_times_played(self, game):
         return sum([result.game == game for result in self.results()])
+
+    @classmethod
+    def highest_scored(cls, game):
+        max_average = 0
+        highest = None
+        for player in cls.all:
+            ave = game.average_score(player)
+            if ave > max_average:
+                max_average = ave
+                highest = player
+        return highest
 
 
 class Result:
